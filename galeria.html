@@ -1,33 +1,106 @@
-<!doctype html>
-<html lang="en" data-bs-theme="light">
-    <head>
-        <title>Galeria</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galería</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  body {
+    background-color: #f8f9fa;
+  }
+  .gallery-item {
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .gallery-item:hover img {
+    transform: scale(1.08);
+  }
+  #modalImagen {
+    max-height: 80vh;
+    object-fit: contain;
+  }
+</style>
+</head>
+<body>
 
-        <!-- Bootstrap CSS v5.3.8 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-            crossorigin="anonymous"
-        />
-    </head>
+<div class="container py-5">
+  <h1 class="text-center mb-5">Galería</h1>
 
-    <body>
-        <header>
-            <!-- place navbar here -->
-        </header>
-        <main></main>
-        <footer>
-            <!-- place footer here -->
-        </footer>
-        <!-- Bootstrap JavaScript Bundle (includes Popper) -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-            crossorigin="anonymous"
-        ></script>
-    </body>
+  <div class="row" id="galeria">
+    <!-- Cada imagen es un item de la galería -->
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-img="https://picsum.photos/id/1015/800/600">
+        <img src="https://picsum.photos/id/1015/400/300" alt="Imagen 1">
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-img="https://picsum.photos/id/1016/800/600">
+        <img src="https://picsum.photos/id/1016/400/300" alt="Imagen 2">
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-img="https://picsum.photos/id/1018/800/600">
+        <img src="https://picsum.photos/id/1018/400/300" alt="Imagen 3">
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-img="https://picsum.photos/id/1020/800/600">
+        <img src="https://picsum.photos/id/1020/400/300" alt="Imagen 4">
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-img="https://picsum.photos/id/1024/800/600">
+        <img src="https://picsum.photos/id/1024/400/300" alt="Imagen 5">
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-img="https://picsum.photos/id/1035/800/600">
+        <img src="https://picsum.photos/id/1035/400/300" alt="Imagen 6">
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-img="https://picsum.photos/id/1043/800/600">
+        <img src="https://picsum.photos/id/1043/400/300" alt="Imagen 7">
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-img="https://picsum.photos/id/1050/800/600">
+        <img src="https://picsum.photos/id/1050/400/300" alt="Imagen 8">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para ver imagen en grande -->
+<div class="modal fade" id="modalGaleria" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark border-0">
+      <div class="modal-body p-0 text-center">
+        <img id="modalImagen" src="" class="img-fluid rounded" alt="Vista ampliada">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  const modalGaleria = document.getElementById('modalGaleria');
+  modalGaleria.addEventListener('show.bs.modal', function (event) {
+    const item = event.relatedTarget;
+    const imgUrl = item.getAttribute('data-img');
+    document.getElementById('modalImagen').src = imgUrl;
+  });
+</script>
+
+</body>
 </html>
